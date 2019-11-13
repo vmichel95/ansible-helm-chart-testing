@@ -1,0 +1,9 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: quay.io/andrewrothstein/docker-ansible:alpine_3.10
+    steps:
+      - checkout
+      - run: ansible --version
+      

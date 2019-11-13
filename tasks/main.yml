@@ -1,0 +1,65 @@
+---
+- name: resolve platform specific vars
+  include_vars: '{{ item }}'
+  with_first_found:
+    - files:
+        - '{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml'
+        - '{{ ansible_distribution }}.yml'
+        - '{{ ansible_os_family }}.yml'
+      skip: true
+      paths:
+        - '{{ role_path }}/vars'
+
+- name: install yamllint via conda
+  conda: name=yamllint version="{{ yamllint_ver }}"
+
+- name: install yamale via conda
+  conda: name=yamale version="{{ yamale_ver }}"
+
+- name: look for install
+  become: yes
+  stat: 
+    path: '{{ helm_chart_testing_ver_install_dir }}'
+  changed_when: False
+  register: helm_chart_testing_binary
+
+- when: not helm_chart_testing_binary.exists
+  block: 
+    - name: download...
+      become: yes
+      become_user: root
+      get_url: 
+        url: '{{ helm_chart_testing_url }}'
+        dest: '/tmp/{{ helm_chart_testing_archive }}'
+        mode: 0644
+        checksum: '{{ helm_chart_testing_checksum }}'
+    - name: mkdir...
+      become: yes
+      become_user: root
+      file:
+        path: '{{ helm_chart_testing_ver_install_dir }}'
+        mode: 0755
+        state: directory
+    - name: unarchive
+      become: yes
+      become_user: root
+      unarchive: 
+        remote_src: yes
+        src: '/tmp/{{ helm_chart_testing_archive }}'
+        dest: '{{ helm_chart_testing_ver_install_dir }}'
+        creates: '{{ helm_chart_testing_ver_install_dir }}/ct'
+  always: 
+    - name: cleanup
+      become: yes
+      become_user: root
+      file:
+        path: '/tmp/{{ helm_chart_testing_archive }}'
+        state: absent
+- name: link 
+  when: helm_chart_testing_link_install_version
+  become: yes
+  become_user: root
+  file: 
+    src: '{{ helm_chart_testing_ver_install_dir }}/ct'
+    dest: '{{ helm_chart_testing_parent_install_dir }}/bin/ct'
+    state: link

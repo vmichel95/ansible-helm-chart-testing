@@ -1,0 +1,18 @@
+---
+dependencies:
+  - role: andrewrothstein.anaconda
+    version: v4.0.9
+  - role: andrewrothstein.git
+    version: v3.0.5
+  - role: andrewrothstein.kubernetes-helm
+    version: v1.2.20
+  - role: andrewrothstein.kubectl
+    version: v1.1.29
+
+galaxy_info:
+  author: Victor Michel
+  description: install helm/chart-testing
+  company: BlackRock
+  min_ansible_version: 2.4
+  galaxy_tags: [integration-testing, helm, k8s]
+  role_name: helm-chart-testing

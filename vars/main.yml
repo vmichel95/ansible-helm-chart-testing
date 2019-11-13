@@ -1,0 +1,6 @@
+---
+helm_chart_testing_archive: chart-testing_{{ helm_chart_testing_ver }}_{{ helm_chart_testing_os }}_{{ helm_chart_testing_arch }}.tar.gz
+helm_chart_testing_url: 'https://github.com/helm/chart-testing/releases/download/v{{ helm_chart_testing_ver }}/{{ helm_chart_testing_archive }}'
+helm_chart_testing_ver_install: '{{ helm_chart_testing_parent_install_dir }}/helm_chart_testing_{{ helm_chart_testing_ver }}'
+helm_chart_testing_checksum: '{{ helm_chart_testing_checksums[helm_chart_testing_ver][helm_chart_testing_os] }}'
+helm_chart_testing_ver_install_dir: '{{ helm_chart_testing_parent_install_dir }}/ct_{{ helm_chart_testing_ver }}'
