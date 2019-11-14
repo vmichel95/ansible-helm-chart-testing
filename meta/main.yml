@@ -15,4 +15,3 @@ galaxy_info:
   company: BlackRock
   min_ansible_version: 2.4
   galaxy_tags: [integration-testing, helm, k8s]
-  role_name: helm-chart-testing
