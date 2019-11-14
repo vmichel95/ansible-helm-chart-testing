@@ -1,0 +1,16 @@
+---
+# Python Yaml Dependencies
+yamllint_ver: v1.18.0
+yamale_ver: 2.0.1
+
+# Helm/Chart-Testing Binary Installation
+helm_chart_testing_link_install_version: true
+helm_chart_testing_ver: 2.4.0
+helm_chart_testing_parent_install_dir: /usr/local/
+helm_chart_testing_os: linux
+helm_chart_testing_arch: amd64
+helm_chart_testing_checksums: 
+  '2.4.0': 
+    darwin: eff8ac721beff4c07c5c2ac84aa3863d75b0b3dac47770ec6ad302eed0e8e03a
+    linux: 44345732cdf385a9ea4ecbc8285cf0499f9843d39d2b8af15dafc13a00d93570
+    windows: 4875d5f4d16e79618dc59ee5616bb0cc33db62d4197584977a5880da457d6292    
